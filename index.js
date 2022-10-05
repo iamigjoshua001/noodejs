@@ -4,16 +4,17 @@ const userRoutes = require("./routes/userRoutes");
 const mongoose = require("mongoose");
 const routesAdmin = require("./routes/routesAdmin");
 
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 const app = express();
 
 app.use(bodyparser.json());
 
-mongoose.connect(
-  "mongodb+srv://iamigjoshua:<joshuaosa098>@cluster0.midzwiu.mongodb.net/?retryWrites=true&w=majority",
-  () => {
-    console.log("data base login");
-  }
-);
+mongoose.connect(process.env.MONGODB_URL, () => {
+  console.log("data base login");
+});
 
 app.get("/", (req, res) => {
   res.send("welcome to my server");
@@ -22,4 +23,4 @@ app.get("/", (req, res) => {
 app.use("/admin", routesAdmin);
 app.use("/user", userRoutes);
 
-app.listen(8000, () => console.log("server is runing"));
+app.listen(process.env.PORT, () => console.log("server is runing"));
