@@ -3,6 +3,7 @@ const bodyparser = require("body-parser");
 const userRoutes = require("./routes/userRoutes");
 const mongoose = require("mongoose");
 const routesAdmin = require("./routes/routesAdmin");
+const routepost = require("./routes/routepost");
 
 const dotenv = require("dotenv");
 
@@ -22,5 +23,6 @@ app.get("/", (req, res) => {
 
 app.use("/admin", routesAdmin);
 app.use("/user", userRoutes);
+app.use("/post", routepost);
 
 app.listen(process.env.PORT, () => console.log("server is runing"));
